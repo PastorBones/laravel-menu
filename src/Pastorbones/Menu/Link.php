@@ -1,7 +1,7 @@
 <?php namespace Lavary\Menu;
 
 class Link {
-	
+
 	/**
 	 * Path Information
 	 *
@@ -22,7 +22,14 @@ class Link {
 	 * @var array
 	 */
 	public $attributes = array();
-	
+
+        /**
+         * Active Link
+         *
+         * @var boolean
+         */
+        protected $isActive = false;
+
 	/**
 	 * Creates a hyper link instance
 	 *
@@ -40,8 +47,9 @@ class Link {
 	 * @return Lavary\Menu\Link
 	 */
 	public function active(){
-	
+
 		$this->attributes['class'] = Builder::formatGroupClass(array('class' => 'active'), $this->attributes);
+                $this->isActive = true;
 		return $this;
 	}
 
@@ -51,9 +59,9 @@ class Link {
 	 * @return Lavary\Menu\Link
 	 */
 	public function href($href){
-	
+
 		$this->href = $href;
-		
+
 		return $this;
 	}
 
@@ -63,9 +71,9 @@ class Link {
 	 * @return Lavary\Menu\Item
 	 */
 	public function secure(){
-		
+
 		$this->path['secure'] = true;
-		
+
 		return $this;
 	}
 
@@ -87,7 +95,7 @@ class Link {
 		elseif(isset($args[0]) && isset($args[1])) {
 			$this->attributes[$args[0]] = $args[1];
 			return $this;
-		} 
+		}
 
 		elseif(isset($args[0])) {
 			return isset($this->attributes[$args[0]]) ? $this->attributes[$args[0]] : null;
@@ -103,14 +111,14 @@ class Link {
 	 * @return void
 	 */
 	public function __get($prop) {
-		
+
 		if( property_exists($this, $prop) ) {
-			
+
 			return $this->$prop;
 
-		} 
+		}
 
 		return $this->attr($prop);
-		
-	}	
+
+	}
 }

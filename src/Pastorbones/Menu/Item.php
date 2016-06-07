@@ -1,4 +1,4 @@
-<?php namespace Lavary\Menu;
+<?php namespace Pastorbones\Menu;
 
 use Illuminate\Support\Str;
 
@@ -7,7 +7,7 @@ class Item {
 	/**
 	 * Reference to the menu builder
 	 *
-	 * @var Lavary\Menu\Menu
+	 * @var Pastorbones\Menu\Menu
 	 */
 	protected $builder;
 
@@ -68,13 +68,13 @@ class Item {
         protected $isActive = false;
 
 	/**
-	 * Creates a new Lavary\Menu\MenuItem instance.
+	 * Creates a new Pastorbones\Menu\MenuItem instance.
 	 *
 	 * @param  string  $title
 	 * @param  string  $url
      * @param  array  $attributes
      * @param  int  $parent
-	 * @param  \Lavary\Menu\Menu  $builder
+	 * @param  \Pastorbones\Menu\Menu  $builder
 	 * @return void
 	 */
 	public function __construct($builder, $id, $title, $options)
@@ -138,7 +138,7 @@ class Item {
 	/**
 	 * Add a plain text item
 	 *
-	 * @return Lavary\Menu\Item
+	 * @return Pastorbones\Menu\Item
 	 */
 	public function raw($title, array $options = array())
 	{
@@ -179,7 +179,7 @@ class Item {
 	 * Add attributes to the item
 	 *
 	 * @param  mixed
-	 * @return string|Lavary\Menu\Item
+	 * @return string|Pastorbones\Menu\Item
 	 */
 	public function attr()
 	{
@@ -228,7 +228,7 @@ class Item {
 	/**
 	 * Prepends text or html to the item
 	 *
-	 * @return Lavary\Menu\Item
+	 * @return Pastorbones\Menu\Item
 	 */
 	public function prepend($html)
 	{
@@ -240,7 +240,7 @@ class Item {
 	/**
 	 * Appends text or html to the item
 	 *
-	 * @return Lavary\Menu\Item
+	 * @return Pastorbones\Menu\Item
 	 */
 	public function append($html)
 	{
@@ -262,7 +262,7 @@ class Item {
 	/**
 	 * Returns childeren of the item
 	 *
-	 * @return Lavary\Menu\Collection
+	 * @return Pastorbones\Menu\Collection
 	 */
 	public function children()
 	{
@@ -272,7 +272,7 @@ class Item {
 	/**
 	 * Returns all childeren of the item
 	 *
-	 * @return Lavary\Menu\Collection
+	 * @return Pastorbones\Menu\Collection
 	 */
 	public function all()
 	{
@@ -316,7 +316,7 @@ class Item {
 	* Set nickname for the item manually
 	*
 	* @param string $nickname
-	* @return /Lavary/Menu/Item
+	* @return /Pastorbones/Menu/Item
 	*/
 	public function nickname($nickname = null) {
 
@@ -333,7 +333,7 @@ class Item {
 	* Set id for the item manually
 	*
 	* @param  mixed $id
-	* @return /Lavary/Menu/Item
+	* @return /Pastorbones/Menu/Item
 	*/
 	public function id($id = null) {
 
@@ -349,9 +349,9 @@ class Item {
 	/**
 	 * Activat the item
 	 *
-	 * @param \Lavary\Menu\Item $item
+	 * @param \Pastorbones\Menu\Item $item
 	 */
-	public function activate( \Lavary\Menu\Item $item = null, $isParent = false ){
+	public function activate( \Pastorbones\Menu\Item $item = null, $isParent = false ){
 
 		$item = is_null($item) ? $this : $item;
                 $active_element = $this->builder->conf('active_element');
@@ -394,7 +394,7 @@ class Item {
 	/**
 	 * Make the item active
 	 *
-	 * @return Lavary\Menu\Item
+	 * @return Pastorbones\Menu\Item
 	 */
 	public function active($pattern = null){
 
@@ -418,7 +418,7 @@ class Item {
 	 * Set or get items's meta data
 	 *
 	 * @param  mixed
-	 * @return string|Lavary\Menu\Item
+	 * @return string|Pastorbones\Menu\Item
 	 */
 	public function data()
 	{

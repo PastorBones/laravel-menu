@@ -1,7 +1,7 @@
-<?php namespace Lavary\Menu;
+<?php namespace Pastorbones\Menu;
 
 class Builder {
-	
+
 	/**
 	 * The items container
 	 *
@@ -29,14 +29,14 @@ class Builder {
 	 * @var array
 	 */
 	protected $groupStack = array();
-	
+
 	/**
 	* The reserved attributes.
 	*
 	* @var array
 	*/
 	protected $reserved = array('route', 'action', 'url', 'prefix', 'parent', 'secure', 'raw');
-	
+
 	/**
 	 * Initializing the menu manager
 	 *
@@ -58,17 +58,17 @@ class Builder {
 	 *
 	 * @param  string  $title
 	 * @param  string|array  $acion
-	 * @return Lavary\Menu\Item $item
+	 * @return Pastorbones\Menu\Item $item
 	 */
 	public function add($title, $options = '')
 	{
-	
+
 		$id = isset($options['id']) ? $options['id'] : $this->id();
 
 		$item = new Item($this, $id, $title, $options);
-                      
+
 		$this->items->push($item);
-		
+
 		return $item;
 	}
 
@@ -85,82 +85,82 @@ class Builder {
 	/**
 	 * Add raw content
 	 *
-	 * @return Lavary\Menu\Item
+	 * @return Pastorbones\Menu\Item
 	 */
 	public function raw($title, array $options = array())
 	{
 		$options['raw'] = true;
-		
+
 		return $this->add($title, $options);
 	}
 
 	/**
 	 * Returns menu item by name
 	 *
-	 * @return Lavary\Menu\Item
+	 * @return Pastorbones\Menu\Item
 	 */
 	public function get($title){
-		
+
 		return $this->whereNickname($title)
-		
-					->first();		
+
+					->first();
 	}
 
 	/**
 	 * Returns menu item by Id
 	 *
-	 * @return Lavary\Menu\Item
+	 * @return Pastorbones\Menu\Item
 	 */
 	public function find($id){
-		
+
 		return $this->whereId($id)
-		
-					->first();		
+
+					->first();
 	}
 
-	
+
 	/**
 	 * Return all items in the collection
 	 *
 	 * @return array
 	 */
 	public function all(){
-		
+
 		return $this->items;
-	
+
 	}
 
 	/**
 	 * Return the first item in the collection
 	 *
-	 * @return Lavary\Menu\Item
+	 * @return Pastorbones\Menu\Item
 	 */
 	public function first(){
-		
+
 		return $this->items->first();
-	
+
 	}
 
 	/**
 	 * Return the last item in the collection
 	 *
-	 * @return Lavary\Menu\Item
+	 * @return Pastorbones\Menu\Item
 	 */
 	public function last(){
-		
-		return $this->items->last();	
+
+		return $this->items->last();
 	}
 
 	/**
 	 * Returns menu item by name
 	 *
-	 * @return Lavary\Menu\Item
+	 * @return Pastorbones\Menu\Item
 	 */
 	public function item($title){
-		
+
 		return $this->whereNickname($title)
-		
-					->first();		
+
+					->first();
 	}
 
 	/**
@@ -170,9 +170,9 @@ class Builder {
 	 * @return void
 	 */
 	public function divide(array $attributes = array()){
-		
+
 		$attributes['class'] = self::formatGroupClass(array('class' => 'divider'), $attributes);
-		
+
 		$this->items->last()->divider = $attributes;
 
 	}
@@ -226,7 +226,7 @@ class Builder {
 	}
 
 	/**
-	 * Merge the given group attributes.	
+	 * Merge the given group attributes.
 	 *
 	 * @param  array  $new
 	 * @param  array  $old
@@ -235,9 +235,9 @@ class Builder {
 	protected static function mergeGroup($new, $old)
 	{
 		$new['prefix'] = self::formatGroupPrefix($new, $old);
-		
+
 		$new['class']  = self::formatGroupClass($new, $old);
-		
+
 		return array_merge(array_except($old, array('prefix', 'class')), $new);
 	}
 
@@ -284,7 +284,7 @@ class Builder {
 		return trim(trim($this->getLastGroupPrefix(), '/').'/'.trim($uri, '/'), '/') ?: '/';
 	}
 
-	
+
 	/**
 	 * Get the valid attributes from the options.
 	 *
@@ -292,11 +292,11 @@ class Builder {
 	 * @return string
 	 */
 	public static function formatGroupClass($new, $old) {
-		
+
 		if(isset($new['class'])) {
-			
+
 			$classes = trim(trim(array_get($old, 'class')) . ' ' . trim(array_get($new, 'class')));
-			
+
 			return implode(' ', array_unique(explode(' ', $classes)));
 		}
 		return array_get($old, 'class');
@@ -314,13 +314,13 @@ class Builder {
 		if(!is_array($options)) {
 			$options = array();
 		}
-			
+
 		if( count($this->groupStack) > 0 ) {
 			$options = $this->mergeWithLastGroup($options);
 		}
 
 		return array_except($options, $this->reserved);
-		
+
 	}
 
 	/**
@@ -365,7 +365,7 @@ class Builder {
 		foreach($options as $key => $value) {
 			$$key = $value;
 		}
-		
+
 		$secure = (isset($options['secure']) && $options['secure'] === true) ? true : false;
 
 		if (is_array($url))
@@ -378,7 +378,7 @@ class Builder {
 
 			return \URL::to($prefix . '/' . $url[0], array_slice($url, 1), $secure);
 		}
-		
+
 		if( self::isAbs($url) ){
 
 			return $url;
@@ -395,7 +395,7 @@ class Builder {
 	 */
 	public static function isAbs($url)
 	{
-		return parse_url($url, PHP_URL_SCHEME) or false;		
+		return parse_url($url, PHP_URL_SCHEME) or false;
 	}
 
 	/**
@@ -445,12 +445,12 @@ class Builder {
 	 *
 	 * @param  callable $callback
 	 *
-	 * @return Lavary\Menu\Builder
+	 * @return Pastorbones\Menu\Builder
 	 */
 	public function filter($callback)
 	{
 		if( is_callable($callback) ) {
-	
+
 			$this->items = $this->items->filter($callback);
 		}
 
@@ -461,7 +461,7 @@ class Builder {
 	 * Sorts the menu based on user's callable
 	 *
 	 * @param string|callable $sort_type
-	 * @return Lavary\Menu\Builder
+	 * @return Pastorbones\Menu\Builder
 	 */
 	public function sortBy($sort_by, $sort_type = 'asc'){
 
@@ -476,22 +476,22 @@ class Builder {
 			$this->items = new Collection($rslt);
 
 		}
-		
+
 		// running the sort proccess on the sortable items
 		$this->items	= $this->items->sort(function ($f, $s) use ($sort_by, $sort_type) {
-			
+
 			$f = $f->$sort_by;
 			$s = $s->$sort_by;
-			
+
 			if( $f == $s ) {
 				return 0;
 			}
 
-			if( $sort_type == 'asc' ) { 
+			if( $sort_type == 'asc' ) {
 				return $f > $s ? 1 : -1;
 			}
-			
-			return $f < $s ? 1 : -1;	
+
+			return $f < $s ? 1 : -1;
 
 		});
 
@@ -499,7 +499,7 @@ class Builder {
 
 	}
 
-	
+
 	/**
 	 * Generate the menu items as list items using a recursive function
 	 *
@@ -510,9 +510,9 @@ class Builder {
 	public function render($type = 'ul', $parent = null)
 	{
 		$items = '';
-		
+
 		$item_tag = in_array($type, array('ul', 'ol')) ? 'li' : $type;
-		
+
 		foreach ($this->whereParent($parent) as $item)
 		{
 			$items  .= '<' . $item_tag . self::attributes($item->attr()) . '>';
@@ -522,13 +522,13 @@ class Builder {
 			} else {
 				$items .= $item->title;
 			}
-					
+
 			if( $item->hasChildren() ) {
 				$items .= "<{$type}>";
 				$items .= $this->render($type, $item->id);
 				$items .= "</{$type}>";
 			}
-			
+
 			$items .= "</{$item_tag}>";
 
 			if($item->divider) {
@@ -538,7 +538,7 @@ class Builder {
 
 		return $items;
 	}
-		
+
 	/**
 	 * Returns the menu as an unordered list.
 	 *
@@ -578,7 +578,7 @@ class Builder {
 	public static function attributes($attributes)
 	{
 		$html = array();
-		
+
 		foreach ((array) $attributes as $key => $value)
 		{
 			$element = self::attributeElement($key, $value);
@@ -586,7 +586,7 @@ class Builder {
 		}
 		return count($html) > 0 ? ' ' . implode(' ', $html) : '';
 	}
-	
+
 	/**
 	 * Build a single attribute element.
 	 *
@@ -611,7 +611,7 @@ class Builder {
 		return $this->conf[$key];
 	}
 
-	
+
 
 	/**
 	 * Merge item's attributes with a static string of attributes
@@ -621,7 +621,7 @@ class Builder {
 	 * @return string
 	 */
 	public static function mergeStatic($new = null, array $old = array()) {
-		
+
 		// Parses the string into an associative array
 		parse_str(preg_replace('/\s*([\w-]+)\s*=\s*"([^"]+)"/', '$1=$2&',  $new), $attrs);
 
@@ -638,26 +638,26 @@ class Builder {
 	 * @param string $attribute
 	 * @param mixed  $value
 	 *
-	 * @return Lavary\Menu\Collection
+	 * @return Pastorbones\Menu\Collection
 	 */
 	public function filterRecursive($attribute, $value){
 
 		$collection = new Collection;
-		
+
 		// Iterate over all the items in the main collection
 		$this->items->each( function ($item) use ($attribute, $value, &$collection) {
-			
+
 			if (!$this->hasProperty($attribute)) {
 				return false;
 			}
-			
+
 			if( $item->$attribute == $value ) {
-				
+
 				$collection->push($item);
-				
+
 				// Check if item has any children
 				if( $item->hasChildren() ) {
-					
+
 					$collection = $collection->merge( $this->filterRecursive($attribute, $item->id) );
 				}
 			}
@@ -673,12 +673,12 @@ class Builder {
 	 * @param string $method
 	 * @param array  $args
 	 *
-	 * @return Lavary\Menu\Item
+	 * @return Pastorbones\Menu\Item
 	 */
 	public function __call($method, $args)
 	{
 		preg_match('/^[W|w]here([a-zA-Z0-9_]+)$/', $method, $matches);
-		
+
 		if($matches) {
 			$attribute = strtolower($matches[1]);
 		} else {
@@ -687,21 +687,21 @@ class Builder {
 
 		$value     = $args ? $args[0] : null;
 		$recursive = isset($args[1]) ? $args[1] : false;
-		
+
 		if( $recursive ) {
 			return $this->filterRecursive($attribute, $value);
-		} 
+		}
 
 		return $this->items->filter(function($item) use ($attribute, $value) {
 
 			if (!$item->hasProperty($attribute)) {
 				return false;
 			}
-			
+
 			if($item->$attribute == $value) {
 				return true;
-			} 
-			
+			}
+
 			return false;
 
 		})->values();
@@ -711,18 +711,18 @@ class Builder {
 	/**
 	 * Returns menu item by name
 	 *
-	 * @return Lavary\Menu\Item
+	 * @return Pastorbones\Menu\Item
 	 */
 	public function __get($prop){
-		
+
 		if(property_exists($this, $prop)) {
 
 			return $this->$prop;
 		}
-		
+
 		return $this->whereNickname($prop)
-		
-					->first();		
+
+					->first();
 	}
 
 }

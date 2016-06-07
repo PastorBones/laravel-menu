@@ -1,4 +1,4 @@
-<?php namespace Lavary\Menu;
+<?php namespace Pastorbones\Menu;
 
 use Illuminate\Support\Collection as BaseCollection;
 
@@ -8,7 +8,7 @@ class Collection extends BaseCollection {
 	 * Add attributes to a collection of items
 	 *
 	 * @param  mixed
-	 * @return Lavary\Menu\Collection
+	 * @return Pastorbones\Menu\Collection
 	 */
 	public function attr() {
 
@@ -29,7 +29,7 @@ class Collection extends BaseCollection {
 	 * Add meta data to a collection of items
 	 *
 	 * @param  mixed
-	 * @return Lavary\Menu\Collection
+	 * @return Pastorbones\Menu\Collection
 	 */
 	public function data() {
 
@@ -50,7 +50,7 @@ class Collection extends BaseCollection {
 	 * Appends text or HTML to a collection of items
 	 *
 	 * @param  string
-	 * @return Lavary\Menu\Collection
+	 * @return Pastorbones\Menu\Collection
 	 */
 	public function append($html) {
 
@@ -65,7 +65,7 @@ class Collection extends BaseCollection {
 	 * Prepends text or HTML to a collection of items
 	 *
 	 * @param  string
-	 * @return Lavary\Menu\Collection
+	 * @return Pastorbones\Menu\Collection
 	 */
 	public function prepend($html, $key = null) {
 

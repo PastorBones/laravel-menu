@@ -1,4 +1,4 @@
-<?php namespace Lavary\Menu;
+<?php namespace Pastorbones\Menu;
 
 class Menu {
 
@@ -24,21 +24,21 @@ class Menu {
 	 *
 	 * @param  string  $name
 	 * @param  callable  $callback
-	 * @return \Lavary\Menu\Menu
+	 * @return \Pastorbones\Menu\Menu
 	 */
 	public function make($name, $callback)
 	{
 		if(is_callable($callback))
 		{
-			
+
 			$menu = new Builder($name, $this->loadConf($name));
-			
+
 			// Registering the items
 			call_user_func($callback, $menu);
-			
+
 			// Storing each menu instance in the collection
 			$this->collection->put($name, $menu);
-			
+
 			// Make the instance available in all views
 			\View::share($name, $menu);
 
@@ -53,10 +53,10 @@ class Menu {
 	 * @return array
 	 */
 	public function loadConf($name) {
-		
+
 		$options = config('laravel-menu.settings');
 		$name    = strtolower($name);
-		
+
 		if( isset($options[$name]) && is_array($options[$name]) ) {
 			return array_merge($options['default'], $options[$name] );
 		}
@@ -68,22 +68,22 @@ class Menu {
 	 * Return Menu instance from the collection by key
 	 *
 	 * @param  string  $key
-	 * @return \Lavary\Menu\Item
+	 * @return \Pastorbones\Menu\Item
 	 */
 	public function get($key) {
-		
+
 		return $this->collection->get($key);
 
 	}
 
 
 	/**
-	 * Return Menu collection 
+	 * Return Menu collection
 	 *
 	 * @return \Illuminate\Support\Collection
 	 */
 	public function getCollection() {
-		
+
 		return $this->collection;
 
 	}
@@ -94,7 +94,7 @@ class Menu {
 	 * @return \Illuminate\Support\Collection
 	 */
 	public function all() {
-		
+
 		return $this->collection;
 
 	}

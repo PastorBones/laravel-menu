@@ -1,4 +1,4 @@
-<?php namespace Lavary\Menu;
+<?php namespace Pastorbones\Menu;
 
 class Link {
 
@@ -44,7 +44,7 @@ class Link {
 	/**
 	 * Make the anchor active
 	 *
-	 * @return Lavary\Menu\Link
+	 * @return Pastorbones\Menu\Link
 	 */
 	public function active(){
 
@@ -56,7 +56,7 @@ class Link {
 	/**
 	 * Set Anchor's href property
 	 *
-	 * @return Lavary\Menu\Link
+	 * @return Pastorbones\Menu\Link
 	 */
 	public function href($href){
 
@@ -68,7 +68,7 @@ class Link {
 	/**
 	 * Make the url secure
 	 *
-	 * @return Lavary\Menu\Item
+	 * @return Pastorbones\Menu\Item
 	 */
 	public function secure(){
 
@@ -81,7 +81,7 @@ class Link {
 	 * Add attributes to the link
 	 *
 	 * @param  mixed
-	 * @return string|Lavary\Menu\Link
+	 * @return string|Pastorbones\Menu\Link
 	 */
 	public function attr()
 	{

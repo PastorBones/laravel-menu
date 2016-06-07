@@ -1,4 +1,4 @@
-<?php namespace Lavary\Menu;
+<?php namespace Pastorbones\Menu;
 
 use Illuminate\Support\Facades\Facade as BaseFacade;
 

@@ -1,4 +1,4 @@
-<?php namespace Lavary\Menu;
+<?php namespace Pastorbones\Menu;
 
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
@@ -20,10 +20,10 @@ class ServiceProvider extends BaseServiceProvider {
 	{
 		 $this->mergeConfigFrom(__DIR__ . '/../../config/settings.php', 'laravel-menu.settings');
 		 $this->mergeConfigFrom(__DIR__ . '/../../config/views.php'   , 'laravel-menu.views');
-		 
+
 		 $this->app->singleton('menu', function($app) {
 		 	return new Menu;
-		 });            
+		 });
 	}
 
 	/**
